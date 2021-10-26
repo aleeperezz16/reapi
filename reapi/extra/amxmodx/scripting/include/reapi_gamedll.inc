@@ -161,24 +161,6 @@ native set_pmove(const PlayerMove:var, any:...);
 native any:get_pmove(const PlayerMove:var, any:...);
 
 /*
-* Sets a movevar value to a playermove.
-*
-* @param var        The specified mvar, look at the enum MoveVars
-*
-* @return           1 on success.
-*/
-native set_movevar(const MoveVars:var, any:...);
-
-/*
-* Returns a movevar value from a playermove.
-*
-* @param var        The specified mvar, look at the enum MoveVars
-*
-* @return           If an integer or boolean or one byte, array or everything else is passed via the 3rd argument and more, look at the argument list for the specified mvar
-*/
-native any:get_movevar(const MoveVars:var, any:...);
-
-/*
 * Sets a pmtrace var.
 *
 * @param var        The specified mvar, look at the enum PMTrace

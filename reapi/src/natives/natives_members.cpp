@@ -496,17 +496,14 @@ cell AMX_NATIVE_CALL get_pmove(AMX *amx, cell *params)
 }
 
 /*
-* Sets a movevar value to a playermove.
-*
-* @param var        The specified mvar, look at the enum MoveVars
-*
-* @return           1 on success.
-*
-* native set_movevar(const MoveVars:var, any:...);
+* Sets movevars data.
+* Use the mv_* MoveVars enum
+* 
+* native set_movevar(const mv, const MoveVars:var, any:...);
 */
 cell AMX_NATIVE_CALL set_movevar(AMX *amx, cell *params)
 {
-	enum args_e { arg_count, arg_var, arg_value };
+	enum args_e { arg_count, arg_mv, arg_var, arg_value };
 	member_t *member = memberlist[params[arg_var]];
 
 	if (unlikely(member == nullptr)) {
@@ -514,22 +511,20 @@ cell AMX_NATIVE_CALL set_movevar(AMX *amx, cell *params)
 		return FALSE;
 	}
 
+	cell* mv = (cell*)params[arg_mv];
 	cell* value = getAmxAddr(amx, params[arg_value]);
-	return set_member(g_pMove->movevars, member, value, 0);
+	return set_member(mv, member, value, 0);
 }
 
 /*
-* Returns a movevar value from a playermove.
-*
-* @param var        The specified mvar, look at the enum MoveVars
-*
-* @return           If an integer or boolean or one byte, array or everything else is passed via the 3rd argument and more, look at the argument list for the specified mvar
-*
-* native any:get_movevar(const MoveVars:var, any:...);
+* Returns movevars data from an entity.
+* Use the mv_* MoveVars enum
+* 
+* native any:get_movevar(const mv, const MoveVars:var, any:...);
 */
 cell AMX_NATIVE_CALL get_movevar(AMX *amx, cell *params)
 {
-	enum args_e { arg_count, arg_var, arg_2, arg_3 };
+	enum args_e { arg_count, arg_mv, arg_var, arg_2, arg_3 };
 	member_t *member = memberlist[params[arg_var]];
 
 	if (unlikely(member == nullptr)) {
@@ -552,7 +547,8 @@ cell AMX_NATIVE_CALL get_movevar(AMX *amx, cell *params)
 		length = 0;
 	}
 
-	return get_member(g_pMove->movevars, member, dest, element, length);
+	cell* mv = (cell*)params[arg_mv];
+	return get_member(mv, member, dest, element, length);
 }
 
 /*
@@ -885,9 +881,10 @@ cell set_member(void* pdata, const member_t *member, cell* value, size_t element
 
 	case MEMBER_ENTITY:
 	case MEMBER_EVARS:
-	case MEBMER_REBUYSTRUCT:
+	case MEMBER_REBUYSTRUCT:
 	case MEMBER_PMTRACE:
-	case MEBMER_USERCMD:
+	case MEMBER_USERCMD:
+	case MEMBER_MOVEVARS:
 		return FALSE;
 
 	default: break;
@@ -1013,12 +1010,14 @@ cell get_member(void* pdata, const member_t *member, cell* dest, size_t element,
 		return 0;
 	case MEMBER_TRACERESULT:
 		return (cell)get_member_direct<TraceResult>(pdata, member->offset, element);
-	case MEBMER_REBUYSTRUCT:
+	case MEMBER_REBUYSTRUCT:
 		return (cell)get_member_direct<RebuyStruct>(pdata, member->offset, element);
 	case MEMBER_PMTRACE:
 		return (cell)get_member_direct<pmtrace_s>(pdata, member->offset, element);
-	case MEBMER_USERCMD:
+	case MEMBER_USERCMD:
 		return (cell)get_member_direct<usercmd_s>(pdata, member->offset, element);
+	case MEMBER_MOVEVARS:
+		return (cell)get_member_direct<movevars_s>(pdata, member->offset, element);
 	default: break;
 	}
 

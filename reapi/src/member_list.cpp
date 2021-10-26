@@ -27,7 +27,7 @@
 #define PL_MEMBERS(mx)           CLASS_MEMBERS(CBasePlayer, mx, mx)
 #define EVAR_MEMBERS(mx)         STRUCT_MEMBERS(com_entvars, mx, var_##mx)
 #define PMOVE_MEMBERS(mx)        STRUCT_MEMBERS(com_playermove, mx, pm_##mx)
-#define MOVEVAR_MEMBERS(mx)      STRUCT_MEMBERS(movevars_t, mx, mv_##mx)
+#define MOVEVAR_MEMBERS(mx)      STRUCT_MEMBERS(movevars_s, mx, mv_##mx)
 #define UCMD_MEMBERS(mx)         STRUCT_MEMBERS(usercmd_s, mx, ucmd_##mx)
 #define PMTRACE_MEMBERS(mx)      STRUCT_MEMBERS(pmtrace_s, mx, pmt_##mx)
 #define CSPL_MEMBERS(mx)         CLASS_MEMBERS(CCSPlayer, mx, mx)
@@ -119,10 +119,11 @@ inline MType getMemberType(unsigned short)      { return MEMBER_SHORT; }
 
 inline MType getMemberType(bool)                { return MEMBER_BOOL; }
 inline MType getMemberType(CUnifiedSignals)     { return MEMBER_SIGNALS; }
-inline MType getMemberType(RebuyStruct)         { return MEBMER_REBUYSTRUCT; }
+inline MType getMemberType(RebuyStruct)         { return MEMBER_REBUYSTRUCT; }
 
 inline MType getMemberType(pmtrace_t)           { return MEMBER_PMTRACE; }
-inline MType getMemberType(usercmd_s)           { return MEBMER_USERCMD; }
+inline MType getMemberType(usercmd_s)           { return MEMBER_USERCMD; }
+inline MType getMemberType(movevars_s*)         { return MEMBER_MOVEVARS; }
 
 template<typename T> struct always_false: std::false_type {};
 
@@ -679,6 +680,7 @@ member_t memberlist_playermove[] = {
 	PMOVE_MEMBERS(cmd),
 	PMOVE_MEMBERS(numtouch),
 	PMOVE_MEMBERS(physinfo),
+	PMOVE_MEMBERS(movevars),
 	PMOVE_MEMBERS(player_mins),
 	PMOVE_MEMBERS(player_maxs),
 

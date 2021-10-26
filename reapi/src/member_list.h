@@ -22,10 +22,11 @@ enum MType
 	MEMBER_BYTE,			// a byte
 	MEMBER_BOOL,			// a bool
 	MEMBER_SIGNALS,			// class CUnifiedSignals
-	MEBMER_REBUYSTRUCT,		// struct RebuyStruct
+	MEMBER_REBUYSTRUCT,		// struct RebuyStruct
 	MEMBER_PMTRACE,			// struct pmtrace_t
-	MEBMER_USERCMD,			// struct usercmd_s
+	MEMBER_USERCMD,			// struct usercmd_s
 	MEMBER_TRACERESULT,		// struct TraceResult
+	MEMBER_MOVEVARS,        // struct movevars_s
 };
 
 struct memberlist_t
@@ -112,7 +113,8 @@ inline bool member_t::isTypeReturnable() const
 	case MEMBER_BOOL:
 	case MEMBER_EVARS:
 	case MEMBER_PMTRACE:
-	case MEBMER_USERCMD:
+	case MEMBER_USERCMD:
+	case MEMBER_MOVEVARS:
 		return true;
 
 	default:
@@ -663,6 +665,7 @@ enum PlayerMove
 	pm_cmd,
 	pm_numtouch,
 	pm_physinfo,
+	pm_movevars,
 	pm_player_mins,
 	pm_player_maxs,
 

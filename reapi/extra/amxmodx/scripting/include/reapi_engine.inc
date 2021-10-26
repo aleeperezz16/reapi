@@ -31,6 +31,18 @@ native set_ucmd(const ucmd, const UCmd:var, any:...);
 native any:get_ucmd(const ucmd, const UCmd:var, any:...);
 
 /*
+* Sets movevars data.
+* Use the mv_* MoveVars enum
+*/
+native set_movevar(const mv, const MoveVars:var, any:...);
+
+/*
+* Returns movevars data from an entity.
+* Use the mv_* MoveVars enum
+*/
+native any:get_movevar(const mv, const MoveVars:var, any:...);
+
+/*
 * Gets value for key in buffer
 *
 * @param pbuffer    Pointer to buffer

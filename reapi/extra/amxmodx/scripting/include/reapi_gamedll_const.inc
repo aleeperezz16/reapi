@@ -3805,16 +3805,16 @@ enum PlayerMove
 	/*
 	* Description:      -
 	* Member type:      float
-	* Get params:       Float:get_pmove(const MoveVars:var);
-	* Set params:       set_pmove(const MoveVars:var, Float:value);
+	* Get params:       Float:get_pmove(const PlayerMove:var);
+	* Set params:       set_pmove(const PlayerMove:var, Float:value);
 	*/
 	pm_time,
 
 	/*
 	* Description:      -
 	* Member type:      float
-	* Get params:       Float:get_pmove(const MoveVars:var);
-	* Set params:       set_pmove(const MoveVars:var, Float:value);
+	* Get params:       Float:get_pmove(const PlayerMove:var);
+	* Set params:       set_pmove(const PlayerMove:var, Float:value);
 	*/
 	pm_frametime,
 
@@ -4243,6 +4243,14 @@ enum PlayerMove
 	pm_physinfo,
 
 	/*
+	* Description		-
+	* Member type:      struct movevars_s *
+	* Get params:       get_pmove(member);
+	* Set params:		set_pmove(const PlayerMove:var, value);
+	*/
+	pm_movevars,
+
+	/*
 	* Description:      -
 	* Member type:      vec3_t [4]
 	* Get params:       get_pmove(const PlayerMove:var, Float:output[3], element);
@@ -4257,220 +4265,6 @@ enum PlayerMove
 	* Set params:       set_pmove(const PlayerMove:var, Float:dest[3], element);
 	*/
 	pm_player_maxs,
-};
-
-/**
-* MoveVars
-*/
-enum MoveVars
-{
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_gravity = BEGIN_MEMBER_REGION(movevars),
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_stopspeed,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_maxspeed,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_spectatormaxspeed,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_accelerate,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_airaccelerate,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_wateraccelerate,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_friction,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_edgefriction,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_waterfriction,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_entgravity,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_bounce,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_stepsize,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_maxvelocity,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_zmax,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_waveHeight,
-
-	/*
-	* Description:      -
-	* Member type:      BOOL
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_footsteps,
-
-	/*
-	* Description:      -
-	* Member type:      char [32]
-	* Get params:       Float:get_movevar(const MoveVars:var, dest[], const lenght);
-	* Set params:       set_movevar(const MoveVars:var, const source[]);
-	*/
-	mv_skyName,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_rollangle,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_rollspeed,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_skycolor_r,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_skycolor_g,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_skycolor_b,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_skyvec_x,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_skyvec_y,
-
-	/*
-	* Description:      -
-	* Member type:      float
-	* Get params:       Float:get_movevar(const MoveVars:var);
-	* Set params:       set_movevar(const MoveVars:var, Float:value);
-	*/
-	mv_skyvec_z,
 };
 
 /**
