@@ -515,7 +515,38 @@ cell AMX_NATIVE_CALL set_movevar(AMX *amx, cell *params)
 	}
 
 	cell* value = getAmxAddr(amx, params[arg_value]);
-	return set_member(g_pMove->movevars, member, value, 0);
+	set_member(g_pMove->movevars, member, value, 0);
+
+	MESSAGE_BEGIN(MSG_ONE, 44, nullptr, UTIL_PlayerByIndex(g_pMove->player_index + 1)->edict());
+		WRITE_LONG(g_pMove->movevars->gravity);
+		WRITE_LONG(g_pMove->movevars->stopspeed);
+		WRITE_LONG(g_pMove->movevars->maxspeed);
+		WRITE_LONG(g_pMove->movevars->spectatormaxspeed);
+		WRITE_LONG(g_pMove->movevars->accelerate);
+		WRITE_LONG(g_pMove->movevars->airaccelerate);
+		WRITE_LONG(g_pMove->movevars->wateraccelerate);
+		WRITE_LONG(g_pMove->movevars->friction);
+		WRITE_LONG(g_pMove->movevars->edgefriction);
+		WRITE_LONG(g_pMove->movevars->waterfriction);
+		WRITE_LONG(g_pMove->movevars->entgravity);
+		WRITE_LONG(g_pMove->movevars->bounce);
+		WRITE_LONG(g_pMove->movevars->stepsize);
+		WRITE_LONG(g_pMove->movevars->maxvelocity);
+		WRITE_LONG(g_pMove->movevars->zmax);
+		WRITE_LONG(g_pMove->movevars->waveHeight);
+		WRITE_BYTE(g_pMove->movevars->footsteps);
+		WRITE_LONG(g_pMove->movevars->rollangle);
+		WRITE_LONG(g_pMove->movevars->rollspeed);
+		WRITE_LONG(g_pMove->movevars->skycolor_b);
+		WRITE_LONG(g_pMove->movevars->skycolor_g);
+		WRITE_LONG(g_pMove->movevars->skycolor_r);
+		WRITE_LONG(g_pMove->movevars->skyvec_x);
+		WRITE_LONG(g_pMove->movevars->skyvec_y);
+		WRITE_LONG(g_pMove->movevars->skyvec_z);
+		WRITE_STRING(g_pMove->movevars->skyName);
+	MESSAGE_END();
+
+	return FALSE;
 }
 
 /*
