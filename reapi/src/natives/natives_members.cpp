@@ -1017,7 +1017,7 @@ cell get_member(void* pdata, const member_t *member, cell* dest, size_t element,
 	case MEMBER_USERCMD:
 		return (cell)get_member_direct<usercmd_s>(pdata, member->offset, element);
 	case MEMBER_MOVEVARS:
-		return (cell)get_member_direct<movevars_s*>(pdata, member->offset, element);
+		return (cell)*get_member_direct<movevars_s*>(pdata, member->offset, element);
 	default: break;
 	}
 
