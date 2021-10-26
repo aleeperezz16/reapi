@@ -878,13 +878,17 @@ cell set_member(void* pdata, const member_t *member, cell* value, size_t element
 			set_member<TraceResult>(pdata, member->offset, *(TraceResult *)value, element);
 			return TRUE;
 		}
+	case MEMBER_MOVEVARS:
+		{
+			set_member<movevars_s>(pdata, member->offset, *(movevars_s*)value, element);
+			return TRUE;
+		}
 
 	case MEMBER_ENTITY:
 	case MEMBER_EVARS:
 	case MEMBER_REBUYSTRUCT:
 	case MEMBER_PMTRACE:
 	case MEMBER_USERCMD:
-	case MEMBER_MOVEVARS:
 		return FALSE;
 
 	default: break;
