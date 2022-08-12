@@ -316,6 +316,14 @@ cell AMX_NATIVE_CALL SetHookChainArg(AMX *amx, cell *params)
 	case ATYPE_CLASSPTR:
 		*(CBaseEntity **)destAddr = getPrivate<CBaseEntity>(*srcAddr);
 		break;
+	case ATYPE_VECTOR:
+	{
+		if (PARAMS_COUNT != 3)
+			return FALSE;
+
+		*(Vector *)destAddr = *(Vector *)srcAddr;
+		break;
+	}
 	case ATYPE_EDICT:
 		*(edict_t **)destAddr = edictByIndexAmx(*srcAddr);
 		break;
