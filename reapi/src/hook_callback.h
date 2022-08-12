@@ -52,7 +52,6 @@ inline AType getApiType(edict_t *)      { return ATYPE_EDICT; }
 inline AType getApiType(entvars_t *)    { return ATYPE_EVARS; }
 inline AType getApiType(bool)           { return ATYPE_BOOL; }
 inline AType getApiType(Vector)         { return ATYPE_VECTOR; }
-inline AType getApiType(Vector&)        { return ATYPE_VECTOR; }
 inline AType getApiType(ENTITYINIT)     { return ATYPE_INTEGER; }
 
 template<typename T>
@@ -103,7 +102,7 @@ struct hookctx_t
 		// current iteration
 		if (current < MAX_HOOKCHAIN_ARGS)
 		{
-			auto &arg = std::get<current>(std::forward<tuple_t>(t));
+			auto arg = std::get<current>(std::forward<tuple_t>(t));
 			args[current].handle = (size_t)&arg;
 			args[current].type   = getApiType(arg);
 			setArgs<current + 1>(std::forward<tuple_t>(t)); // call next
